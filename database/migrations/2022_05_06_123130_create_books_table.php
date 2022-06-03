@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('others_auth',  40)->nullable();
             $table->string('edition', 40)->nullable();
             $table->string('land', 40)->nullable();
-            $table->string('editorial, 40')->nullable();
+            $table->string('editorial', 40)->nullable();
             $table->integer('year')->nullable();
             $table->text('description')->nullable();
 

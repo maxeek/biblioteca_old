@@ -34,7 +34,7 @@ class Book extends Model
 {
 
     static $rules = [
-		'id_author' => 'required',
+		'author_id' => 'required',
 		'inventory' => 'required',
 		'title' => 'required',
 
@@ -47,7 +47,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_author','inventory','others_auth','title','edition','land','editorial','year','description','tags','observation','condition','signatura_top'];
+    protected $fillable = ['author_id','inventory','others_auth','title','edition','land','editorial','year','description','tags','observation','condition','signatura_top'];
 
 
     /**
@@ -55,7 +55,7 @@ class Book extends Model
      */
     public function author()
     {
-        return $this->hasOne('App\Models\Author', 'id', 'id_author');
+        return $this->hasOne('App\Models\Author', 'id', 'author_id');
     }
 
     /**

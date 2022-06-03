@@ -37,13 +37,14 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Id Autor</th>
+										<th>Título</th>
+										<th>Autor</th>
+
 										<th>N° Inventario</th>
 										<th>Otros Autores</th>
-										<th>Título</th>
 										<th>Edición</th>
 										<th>País</th>
-										<th>Editorial</th>
+
 
 
 										<th>Condition</th>
@@ -57,18 +58,19 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $book->id_author }}</td>
+											<td>{{ $book->title }}</td>
+											<td>{{ $book->author->name ." ". $book->author->surname  }}</td>
+
 											<td>{{ $book->inventory }}</td>
 											<td>{{ $book->others_auth }}</td>
-											<td>{{ $book->title }}</td>
 											<td>{{ $book->edition }}</td>
 											<td>{{ $book->land }}</td>
-											<td>{{ $book->editorial }}</td>
-
-
-
-
 											<td>{{ $book->condition }}</td>
+
+
+
+
+
 
 
                                             <td>

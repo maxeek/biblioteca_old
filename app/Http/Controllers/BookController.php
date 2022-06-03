@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\Author;
 
 /**
  * Class BookController
@@ -21,7 +22,8 @@ class BookController extends Controller
         $books = Book::paginate();
 
         return view('book.index', compact('books'))
-            ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
+        ->with('author:id,surname,name')
+        ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
     }
 
     /**
@@ -48,7 +50,7 @@ class BookController extends Controller
         $book = Book::create($request->all());
 
         return redirect()->route('books.index')
-            ->with('success', 'Book created successfully.');
+            ->with('success', 'Libro creado exitosamente.');
     }
 
     /**
@@ -91,7 +93,7 @@ class BookController extends Controller
         $book->update($request->all());
 
         return redirect()->route('books.index')
-            ->with('success', 'Book updated successfully');
+            ->with('success', 'Libro modificado exitosamente.');
     }
 
     /**
