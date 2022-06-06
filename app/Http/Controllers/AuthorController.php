@@ -104,6 +104,6 @@ class AuthorController extends Controller
         $author = Author::find($id)->delete();
 
         return redirect()->route('authors.index')
-            ->with('success', 'Author deleted successfully');
+            ->with('success', 'Autor eliminado con éxito');
     }
 }

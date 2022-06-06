@@ -40,7 +40,7 @@ class Author extends Model
      */
     public function books()
     {
-        return $this->hasMany('App\Models\Book', 'id_author', 'id');
+        return $this->hasMany('App\Models\Book', 'author_id', 'id');
     }
 
 

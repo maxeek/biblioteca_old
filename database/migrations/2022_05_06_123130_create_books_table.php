@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('category_id');
 
             $table->integer('inventory')->unique();
 
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->integer('year')->nullable();
             $table->text('description')->nullable();
 
-            $table->text('tags')->nullable();
+            $table->text('tags', 2000)->nullable();
             $table->text('observation')->nullable();
             $table->integer('condition')->nullable();
             $table->string('signatura_top',30)->nullable();
@@ -41,6 +42,9 @@ return new class extends Migration
 
 
              $table->foreign('author_id')->references('id')->on('authors')
+             ->onDelete("cascade")
+             ->onUpdate("cascade");
+              $table->foreign('category_id')->references('id')->on('categories')
              ->onDelete("cascade")
              ->onUpdate("cascade");
         });

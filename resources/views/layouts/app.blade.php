@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Biblioteca') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+@yield('css')
 </head>
 
 <body>
@@ -36,26 +37,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                   <ul class="p-1 navbar-nav">
-                        <li>
-                            <a class="btn btn-sm btn-secondary" href="{{ route('categories.index') }}"><i
-                                    class="fa fa-fw fa-edit"></i> Categorías</a>
+                    <ul class="navbar-nav me-auto">
 
-                        </li>
-                    </ul>
-                    <ul class="p-1 navbar-nav">
-                        <li>
-                            <a class="btn btn-sm btn-secondary" href="{{ route('books.index') }}"><i
-                                    class="fa fa-fw fa-edit"></i> Libros</a>
-
-                        </li>
-                    </ul>
-                    <ul class="p-1 navbar-nav">
-                        <li>
-                            <a class="btn btn-sm btn-secondary" href="{{ route('authors.index') }}"><i
-                                    class="fa fa-fw fa-edit"></i> Autores</a>
-
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,10 +57,33 @@
                                 </li>
                             @endif
                         @else
+                            <div>
+                                <ul class="navbar-nav">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('authors.index') }}">
+                                            Autores</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('books.index') }}">
+                                            Libros</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('categories.index') }}">
+                                            Categorías</a>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+
+
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{-- {{ Auth::user()->name }} --}}
+                                    Salir
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -102,6 +108,8 @@
             @yield('content')
         </main>
     </div>
+
+       @yield('js')
 </body>
 
 </html>

@@ -25,14 +25,32 @@
                             <div class="box box-info padding-1">
                                 <div class="box-body">
 
-                                    <div class="form-group">
-                                        {{ Form::label('author_id') }}
-                                        {{ Form::text('author_id', $book->author_id, ['class' => 'form-control' . ($errors->has('author_id') ? ' is-invalid' : ''), 'placeholder' => 'author_id']) }}
+                                    {{-- <div class="form-group">
+                                        {{ Form::label('Autor') }}
+                                        {{ Form::text('author_id', $book->author_id, ['class' => 'form-control' . ($errors->has('author_id') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese autor']) }}
                                         {!! $errors->first('author_id', '<div class="invalid-feedback">:message</div>') !!}
-                                    </div>
+                                    </div> --}}
+
                                     <div class="form-group">
-                                        {{ Form::label('inventory') }}
-                                        {{ Form::text('inventory', $book->inventory, ['class' => 'form-control' . ($errors->has('inventory') ? ' is-invalid' : ''), 'placeholder' => 'Inventory']) }}
+                                        {{ Form::label('Autor') }}
+                                        <select name="author_id" id="author_id" class="form-group">
+
+                                            @for ($i = 0; $i < count($authors); $i++)
+                                                <option value={{ $authors[$i]->id }}>{{ $authors[$i]->surname }} {{ $authors[$i]->name }}  </option>
+                                            @endfor
+
+
+
+
+                                        </select>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        {{ Form::label('Inventario') }}
+                                        {{ Form::text('inventory', $book->inventory, ['class' => 'form-control' . ($errors->has('inventory') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese N° de inventario']) }}
                                         {!! $errors->first('inventory', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group">

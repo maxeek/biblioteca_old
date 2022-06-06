@@ -3,6 +3,18 @@
 @section('template_title')
     Book
 @endsection
+@section('css')
+    <!-- Styles -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css
+        ">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
+        ">
+@endsection
+
+
+<link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
 
 @section('content')
     <div class="container-fluid">
@@ -16,12 +28,13 @@
                                 Libros
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('books.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  Crear nuevo
-                                  {{-- {{ __('Create New') }} --}}
+                            <div class="float-right">
+                                <a href="{{ route('books.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    Crear nuevo
+                                    {{-- {{ __('Create New') }} --}}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -32,56 +45,68 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="libros" class="table table-striped table-hover">
+                                {{-- <table id="beneficiarios" class="table table-dark table-striped table-bordered shadow-lg mt-4 table-hover" style="100%"> --}}
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                        <th></th>
 
-										<th>Título</th>
-										<th>Autor</th>
+                                        <th>Título</th>
+                                        <th>Autor</th>
 
-										<th>N° Inventario</th>
-										<th>Otros Autores</th>
-										<th>Edición</th>
-										<th>País</th>
+                                        <th>N° Inventario</th>
+                                        <th>Otros Autores</th>
+                                        <th>Edición</th>
+                                        <th>País</th>
 
 
 
-										<th>Condition</th>
+                                        <th>Condition</th>
+                                        <th></th>
+
 
 
                                         <th></th>
                                     </tr>
+
                                 </thead>
                                 <tbody>
                                     @foreach ($books as $book)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td style="visibility:hidden">{{ ++$i }}</td>
 
-											<td>{{ $book->title }}</td>
-											<td>{{ $book->author->name ." ". $book->author->surname  }}</td>
+                                            <td style="width: 30%">{{ $book->title }}</td>
+                                            <td style="width: 30%">
+                                                {{ $book->author->name . ' ' . $book->author->surname }}</td>
 
-											<td>{{ $book->inventory }}</td>
-											<td>{{ $book->others_auth }}</td>
-											<td>{{ $book->edition }}</td>
-											<td>{{ $book->land }}</td>
-											<td>{{ $book->condition }}</td>
-
-
-
+                                            <td>{{ $book->inventory }}</td>
+                                            <td>{{ $book->others_auth }}</td>
+                                            <td>{{ $book->edition }}</td>
+                                            <td>{{ $book->land }}</td>
+                                            <td>{{ $book->condition }}</td>
 
 
 
 
-                                            <td>
-                                                <form action="{{ route('books.destroy',$book->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('books.show',$book->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('books.edit',$book->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+
+
+
+                                            <td style="width: 35%;">
+                                                <form action="{{ route('books.destroy', $book->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('books.show', $book->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('books.edit', $book->id) }}"><i
+                                                            class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i> Eliminar</button>
                                                 </form>
                                             </td>
+                                            <td style="visibility:hidden">{{ $book->tags }}</td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -90,7 +115,41 @@
                     </div>
                 </div>
                 {!! $books->links() !!}
+
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+
+    <script>
+        $('#libros').DataTable({
+            responsive: true,
+            autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar " +
+                    `<select>
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='25'>25</option>
+                <option value='50'>50</option>
+                <option value='-1'>Todos</option>
+                </select>` + " registros por página",
+                "zeroRecords": "Nada encontrado - Disculpa",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No records available",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                'search': 'Buscar:',
+                'paginate': {
+                    'next': 'Siguiente',
+                    'previous': 'Anterior'
+                }
+            }
+        });
+    </script>
 @endsection

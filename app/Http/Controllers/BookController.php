@@ -6,12 +6,26 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Author;
 
+
 /**
  * Class BookController
  * @package App\Http\Controllers
  */
 class BookController extends Controller
 {
+
+
+
+public function __construct()
+
+	{
+	$this->middleware('auth');
+
+
+
+        }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +33,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate();
+        $books = Book::orderBy('title') ->paginate();
 
         return view('book.index', compact('books'))
         ->with('author:id,surname,name')
+        ->with('category:id,name')
         ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
     }
 
@@ -33,8 +48,13 @@ class BookController extends Controller
      */
     public function create()
     {
+
+         $authors =Author::orderBy('surname')->get();
         $book = new Book();
-        return view('book.create', compact('book'));
+    //     return view('book.create', compact('book')
+    // ->with('author:id,surname,name'));
+
+    return view('book.create', compact('book'), ['authors'=>$authors]);
     }
 
     /**
