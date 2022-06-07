@@ -6,25 +6,16 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Author;
 
-
 /**
  * Class BookController
  * @package App\Http\Controllers
  */
 class BookController extends Controller
 {
-
-
-
-public function __construct()
-
-	{
-	$this->middleware('auth');
-
-
-
-        }
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -33,12 +24,15 @@ public function __construct()
      */
     public function index()
     {
-        $books = Book::orderBy('title') ->paginate();
+        // $books = Book::orderBy('title')->paginate();
 
-        return view('book.index', compact('books'))
-        ->with('author:id,surname,name')
-        ->with('category:id,name')
-        ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
+        // return view('book.index', compact('books'))
+        //     ->with('author:id,surname,name')
+        //     ->with('category:id,name')
+        //     ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
+
+        $books = Book::all();
+        return view('book.index', compact('books'));
     }
 
     /**
@@ -48,13 +42,12 @@ public function __construct()
      */
     public function create()
     {
-
-         $authors =Author::orderBy('surname')->get();
+        $authors = Author::orderBy('surname')->get();
         $book = new Book();
-    //     return view('book.create', compact('book')
-    // ->with('author:id,surname,name'));
+        //     return view('book.create', compact('book')
+        // ->with('author:id,surname,name'));
 
-    return view('book.create', compact('book'), ['authors'=>$authors]);
+        return view('book.create', compact('book'), ['authors' => $authors]);
     }
 
     /**
@@ -69,7 +62,8 @@ public function __construct()
 
         $book = Book::create($request->all());
 
-        return redirect()->route('books.index')
+        return redirect()
+            ->route('books.index')
             ->with('success', 'Libro creado exitosamente.');
     }
 
@@ -112,7 +106,8 @@ public function __construct()
 
         $book->update($request->all());
 
-        return redirect()->route('books.index')
+        return redirect()
+            ->route('books.index')
             ->with('success', 'Libro modificado exitosamente.');
     }
 
@@ -125,7 +120,8 @@ public function __construct()
     {
         $book = Book::find($id)->delete();
 
-        return redirect()->route('books.index')
+        return redirect()
+            ->route('books.index')
             ->with('success', 'Book deleted successfully');
     }
 }

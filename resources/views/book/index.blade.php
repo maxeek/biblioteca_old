@@ -7,13 +7,13 @@
     <!-- Styles -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css
-        ">
+                        ">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
-        ">
+                        ">
+    <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 @endsection
 
 
-<link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
 
 @section('content')
@@ -62,7 +62,7 @@
 
 
                                         <th>Condition</th>
-                                        <th></th>
+                                        {{-- <th></th> --}}
 
 
 
@@ -73,7 +73,7 @@
                                 <tbody>
                                     @foreach ($books as $book)
                                         <tr>
-                                            <td style="visibility:hidden">{{ ++$i }}</td>
+                                            <td style="visibility:hidden"></td>
 
                                             <td style="width: 30%">{{ $book->title }}</td>
                                             <td style="width: 30%">
@@ -105,7 +105,7 @@
                                                             class="fa fa-fw fa-trash"></i> Eliminar</button>
                                                 </form>
                                             </td>
-                                            <td style="visibility:hidden">{{ $book->tags }}</td>
+                                            {{-- <td style="visibility:hidden">{{ $book->tags }}</td> --}}
 
                                         </tr>
                                     @endforeach
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $books->links() !!}
+                {{-- {!! $books->links() !!} --}}
 
             </div>
         </div>
