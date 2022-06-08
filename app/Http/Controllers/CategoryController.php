@@ -30,10 +30,16 @@ public function __construct()
      */
     public function index()
     {
-        $categories = Category::paginate();
+        // $categories = Category::paginate();
 
-        return view('category.index', compact('categories'))
-            ->with('i', (request()->input('page', 1) - 1) * $categories->perPage());
+        // return view('category.index', compact('categories'))
+        //     ->with('i', (request()->input('page', 1) - 1) * $categories->perPage());
+
+
+        $categories = Category::all();
+        return view ('category.index', compact('categories'));
+
+
     }
 
     /**

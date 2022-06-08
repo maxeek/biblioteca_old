@@ -7,9 +7,9 @@
     <!-- Styles -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css
-                        ">
+                            ">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
-                        ">
+                            ">
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 @endsection
 
@@ -50,18 +50,18 @@
                                 <thead class="thead">
                                     <tr>
                                         <th></th>
+                                        <th>N° Inventario</th>
 
                                         <th>Título</th>
                                         <th>Autor</th>
 
-                                        <th>N° Inventario</th>
                                         <th>Otros Autores</th>
                                         <th>Edición</th>
-                                        <th>País</th>
 
 
 
-                                        <th>Condition</th>
+
+                                        <th>Condición</th>
                                         {{-- <th></th> --}}
 
 
@@ -74,16 +74,20 @@
                                     @foreach ($books as $book)
                                         <tr>
                                             <td style="visibility:hidden"></td>
+                                            <td>{{ $book->inventory }}</td>
 
                                             <td style="width: 30%">{{ $book->title }}</td>
-                                            <td style="width: 30%">
+                                            <td class="text-uppercase" style="width: 30%">
                                                 {{ $book->author->name . ' ' . $book->author->surname }}</td>
 
-                                            <td>{{ $book->inventory }}</td>
                                             <td>{{ $book->others_auth }}</td>
                                             <td>{{ $book->edition }}</td>
-                                            <td>{{ $book->land }}</td>
-                                            <td>{{ $book->condition }}</td>
+
+                                            @if ($book->condition == 1)
+                                                <td style="width: 8%">Disponible</td>
+                                            @else
+                                                <td style="width: 8%">Prestado</td>
+                                            @endif
 
 
 
@@ -91,7 +95,9 @@
 
 
 
-                                            <td style="width: 35%;">
+
+
+                                            <td style="width: 35%">
                                                 <form action="{{ route('books.destroy', $book->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary "
                                                         href="{{ route('books.show', $book->id) }}"><i
@@ -125,7 +131,21 @@
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
 
+    {{-- <script>
 
+    $(document).ready(()=> {
+
+
+
+         $('tbody tr').click(function() {
+        $(this).hide();
+
+
+    }
+    )});
+
+
+</script> --}}
 
     <script>
         $('#libros').DataTable({

@@ -63,7 +63,7 @@ class Book extends Model
      */
     public function leases()
     {
-        return $this->hasMany('App\Models\Lease', 'id_book', 'id');
+        return $this->hasMany('App\Models\Lease', 'book_id', 'id');
     }
 
 

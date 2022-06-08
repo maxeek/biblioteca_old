@@ -18,10 +18,14 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::paginate();
+        // $authors = Author::paginate();
 
-        return view('author.index', compact('authors'))
-            ->with('i', (request()->input('page', 1) - 1) * $authors->perPage());
+        // return view('author.index', compact('authors'))
+        //     ->with('i', (request()->input('page', 1) - 1) * $authors->perPage());
+        $authors=Author::all();
+        return view('author.index', compact('authors'));
+
+
     }
 
     /**

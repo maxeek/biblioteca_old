@@ -11,37 +11,37 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Book</span>
+                            <span class="card-title">Mostrar libro</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('books.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('books.index') }}"> Atrás</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
-                            <strong>Id Author:</strong>
+                            <strong>Autor:</strong>
                             {{ $book->id_author }}
                         </div>
                         <div class="form-group">
-                            <strong>Inventory:</strong>
+                            <strong>Inventario:</strong>
                             {{ $book->inventory }}
                         </div>
                         <div class="form-group">
-                            <strong>Others Auth:</strong>
+                            <strong>Otros autores:</strong>
                             {{ $book->others_auth }}
                         </div>
                         <div class="form-group">
-                            <strong>Title:</strong>
+                            <strong>Título:</strong>
                             {{ $book->title }}
                         </div>
                         <div class="form-group">
-                            <strong>Edition:</strong>
+                            <strong>Edición:</strong>
                             {{ $book->edition }}
                         </div>
                         <div class="form-group">
-                            <strong>Land:</strong>
+                            <strong>País:</strong>
                             {{ $book->land }}
                         </div>
                         <div class="form-group">
@@ -49,28 +49,36 @@
                             {{ $book->editorial }}
                         </div>
                         <div class="form-group">
-                            <strong>Year:</strong>
+                            <strong>Año:</strong>
                             {{ $book->year }}
                         </div>
                         <div class="form-group">
-                            <strong>Description:</strong>
+                            <strong>Descripción:</strong>
                             {{ $book->description }}
                         </div>
                         <div class="form-group">
-                            <strong>Category:</strong>
+                            <strong>Categoría:</strong>
                             {{ $book->category }}
                         </div>
                         <div class="form-group">
-                            <strong>Tags:</strong>
+                            <strong>Etiquetas:</strong>
                             {{ $book->tags }}
                         </div>
                         <div class="form-group">
-                            <strong>Observation:</strong>
+                            <strong>Observación:</strong>
                             {{ $book->observation }}
                         </div>
                         <div class="form-group">
-                            <strong>Condition:</strong>
-                            {{ $book->condition }}
+
+                            <strong>Condición:</strong>
+
+                            @if ($book->condition == 1)
+                                <td>Disponible</td>
+                            @else
+                                <td>Prestado</td>
+                            @endif
+
+
                         </div>
                         <div class="form-group">
                             <strong>Signatura Top:</strong>

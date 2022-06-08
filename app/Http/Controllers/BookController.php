@@ -31,7 +31,13 @@ class BookController extends Controller
         //     ->with('category:id,name')
         //     ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
 
-        $books = Book::all();
+
+
+
+        // $books = Book::all();
+
+
+        $books = Book::orderBy('title', 'ASC')->get();
         return view('book.index', compact('books'));
     }
 
@@ -88,9 +94,20 @@ class BookController extends Controller
      */
     public function edit($id)
     {
+
+        $authors = Author::orderBy('surname')->get();
+
+
+
+
+
+
         $book = Book::find($id);
 
-        return view('book.edit', compact('book'));
+        return view('book.edit', compact('book'), ['authors' => $authors]);
+
+
+
     }
 
     /**
