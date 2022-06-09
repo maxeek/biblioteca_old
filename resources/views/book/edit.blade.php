@@ -16,14 +16,15 @@
                         <span class="card-title">Editar libro</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('books.update', $book->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('books.update', $book->id) }}" role="form"
+                            enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
                             {{-- @include('book.form') --}}
 
 
-                             <div class="box box-info padding-1">
+                            <div class="box box-info padding-1">
                                 <div class="box-body">
 
                                     {{-- <div class="form-group">
@@ -34,21 +35,38 @@
 
                                     <div class="form-group">
                                         {{ Form::label('Autor') }}
-                                        <select name="author_id" id="author_id" class="form-group text-uppercase" >
+                                        <select name="author_id" id="author_id" class="form-group text-uppercase">
 
                                             @for ($i = 0; $i < count($authors); $i++)
-                                                <option class="text-uppercase"  value={{ $authors[$i]->id }}>{{ $authors[$i]->surname }} {{ $authors[$i]->name }}  </option>
+                                                <option class="text-uppercase" value={{ $authors[$i]->id }}>
+                                                    {{ $authors[$i]->surname }} {{ $authors[$i]->name }} </option>
                                             @endfor
 
 
-                                            <option class="text-uppercase" selected value={{$book->author_id}}>{{$book->author->surname }} {{$book->author->name }}</option>
+                                            <option class="text-uppercase" selected value={{ $book->author_id }}>
+                                                {{ $book->author->surname }} {{ $book->author->name }}</option>
 
 
 
 
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        {{ Form::label('Categoría') }}
+                                        <select name="category_id" id="category_id" class="form-group text-uppercase">
 
+                                            @for ($i = 0; $i < count($categories); $i++)
+                                                <option value={{ $categories[$i]->id }}>{{ $categories[$i]->name }}
+                                                </option>
+                                            @endfor
+
+                                            <option class="text-uppercase" selected value={{ $book->author_id }}>
+                                                {{ $book->categ->name }} </option>
+
+
+
+                                        </select>
+                                    </div>
 
 
 
@@ -83,7 +101,7 @@
                                         {!! $errors->first('editorial', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group">
-                                        {{ Form::label('Añp') }}
+                                        {{ Form::label('Año') }}
                                         {{ Form::text('year', $book->year, ['class' => 'form-control' . ($errors->has('year') ? ' is-invalid' : ''), 'placeholder' => 'Año']) }}
                                         {!! $errors->first('year', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>

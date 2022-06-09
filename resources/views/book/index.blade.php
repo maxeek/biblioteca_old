@@ -7,9 +7,9 @@
     <!-- Styles -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css
-                            ">
+                                    ">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
-                            ">
+                                    ">
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 @endsection
 
@@ -62,11 +62,13 @@
 
 
                                         <th>Condición</th>
-                                        {{-- <th></th> --}}
 
 
 
-                                        <th></th>
+
+
+                                        <th>Acciones</th>
+                                        <th style='visibility:collapse'>Etiqueta</th>
                                     </tr>
 
                                 </thead>
@@ -111,7 +113,7 @@
                                                             class="fa fa-fw fa-trash"></i> Eliminar</button>
                                                 </form>
                                             </td>
-                                            {{-- <td style="visibility:hidden">{{ $book->tags }}</td> --}}
+                                            <td style='visibility:collapse'>{{ $book->tags }}</td>
 
                                         </tr>
                                     @endforeach
@@ -147,10 +149,36 @@
 
 </script> --}}
 
+
+
+
     <script>
         $('#libros').DataTable({
             responsive: true,
             autoWidth: false,
+            // aca oculto la columna de etiquetas o tag
+            // para que una columna no sea searchable hay que poner falso ej:
+            // searchable: false,
+
+            ///// otros ejemplos
+            //        columnDefs: [
+            //     {
+            //         target: 2,
+            //         visible: false,
+            //         searchable: false,
+            //     },
+            //     {
+            //         target: 8,
+            //         visible: false,
+            //     },
+            // ],
+            columnDefs: [{
+
+                target: 8,
+                visible: false
+            }, ],
+
+
             "language": {
                 "lengthMenu": "Mostrar " +
                     `<select>

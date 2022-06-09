@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Author;
+use App\Models\Category;
 
 /**
  * Class BookController
@@ -49,11 +50,12 @@ class BookController extends Controller
     public function create()
     {
         $authors = Author::orderBy('surname')->get();
+        $categories = Category::orderBy('name')->get();
         $book = new Book();
         //     return view('book.create', compact('book')
         // ->with('author:id,surname,name'));
 
-        return view('book.create', compact('book'), ['authors' => $authors]);
+        return view('book.create', compact('book'), ['authors' => $authors, 'categories'=> $categories] );
     }
 
     /**
@@ -97,6 +99,7 @@ class BookController extends Controller
 
         $authors = Author::orderBy('surname')->get();
 
+        $categories = Category::orderBy('name')->get();
 
 
 
@@ -104,7 +107,7 @@ class BookController extends Controller
 
         $book = Book::find($id);
 
-        return view('book.edit', compact('book'), ['authors' => $authors]);
+        return view('book.edit', compact('book'), ['authors' => $authors, 'categories'=>$categories ]);
 
 
 

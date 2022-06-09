@@ -47,7 +47,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = ['author_id','inventory','others_auth','title','edition','land','editorial','year','description','tags','observation','condition','signatura_top'];
+    protected $fillable = ['category_id', 'author_id','inventory','others_auth','title','edition','land','editorial','year','description','tags','observation','condition','signatura_top'];
 
 
     /**
@@ -71,8 +71,12 @@ class Book extends Model
 
     public function categ_r() {
 
-   return $this->belongsToMany('App\Models\Category');
+   return $this->belongsToMany('App\Models\Category', 'id', 'category_id');
 
+    }
+     public function categ()
+    {
+        return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
 
 }

@@ -22,7 +22,7 @@
 
                         <div class="form-group">
                             <strong>Autor:</strong>
-                            {{ $book->id_author }}
+                            {{ $book->author->name }} {{ $book->author->surname }}
                         </div>
                         <div class="form-group">
                             <strong>Inventario:</strong>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Categoría:</strong>
-                            {{ $book->category }}
+                            {{ $book->categ->name }}
                         </div>
                         <div class="form-group">
                             <strong>Etiquetas:</strong>
@@ -84,6 +84,11 @@
                             <strong>Signatura Top:</strong>
                             {{ $book->signatura_top }}
                         </div>
+                        {{-- <div class="form-group">
+                            <strong>Categoría o materia:</strong>
+                            {{ $book->categ_r->category_id }}
+                        </div> --}}
+
 
                     </div>
                 </div>

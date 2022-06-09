@@ -35,9 +35,9 @@ class Category extends Model
 
 // relación muchos a muchos
 
-public function book_r() {
+public function categor() {
 
-   return $this->belongsToMany('App\Models\Book');
+   return $this->belongsToMany('App\Models\Book', 'category_id', 'id');
 
     }
 
