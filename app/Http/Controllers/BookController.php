@@ -6,7 +6,7 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Author;
 use App\Models\Category;
-
+use Yajra\DataTables\Facades\DataTables;
 /**
  * Class BookController
  * @package App\Http\Controllers
@@ -23,23 +23,49 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
+
     {
-        // $books = Book::orderBy('title')->paginate();
 
-        // return view('book.index', compact('books'))
-        //     ->with('author:id,surname,name')
-        //     ->with('category:id,name')
-        //     ->with('i', (request()->input('page', 1) - 1) * $books->perPage());
+        if ($request->ajax()) {
 
 
+            ;
+
+            $books = Book::with('author', 'categ')
+            ->orderBy('title');
 
 
-        // $books = Book::all();
+
+            return Datatables::of($books)
+
+                    ->addIndexColumn()
+
+                ->addColumn('autor', function ($books) {
+                // return ('Klimavicius');
+                return [($books->author->name). " " . ($books->author->surname)];
+            })
+                    ->addColumn('action', function($books){
 
 
-        $books = Book::orderBy('title', 'ASC')->get();
-        return view('book.index', compact('books'));
+                        $ids=$books->id;
+
+                        return '<a href="books/' .  $ids . '" class="btn btn-primary mr-2">Mostrar</a>' . '<a href="books/' .  $ids . '/edit " class="btn btn-success mr-2">Editar</a>';
+
+                    })
+
+                    ->rawColumns(['action'])
+
+                    ->make(true);
+
+        }
+
+
+        return view('book.index');
+
+
+
+
     }
 
     /**

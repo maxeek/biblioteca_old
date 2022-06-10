@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
                                     ">
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-@endsection
+
+
+    @endsection
 
 
 
@@ -49,7 +51,7 @@
                                 {{-- <table id="beneficiarios" class="table table-dark table-striped table-bordered shadow-lg mt-4 table-hover" style="100%"> --}}
                                 <thead class="thead">
                                     <tr>
-                                        <th></th>
+                                        {{-- <th></th> --}}
                                         <th>N° Inventario</th>
 
                                         <th>Título</th>
@@ -67,13 +69,13 @@
 
 
 
-                                        <th>Acciones</th>
+                                        <th with="35%">Acciones</th>
                                         <th style='visibility:collapse'>Etiqueta</th>
                                     </tr>
 
                                 </thead>
                                 <tbody>
-                                    @foreach ($books as $book)
+                                    {{-- @foreach ($books as $book)
                                         <tr>
                                             <td style="visibility:hidden"></td>
                                             <td>{{ $book->inventory }}</td>
@@ -116,7 +118,7 @@
                                             <td style='visibility:collapse'>{{ $book->tags }}</td>
 
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -132,72 +134,127 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
+    {{-- <script type="text/javascript" src="/DataTables/datatables.min.js"></script> --}}
 
-    {{-- <script>
-
-    $(document).ready(()=> {
-
-
-
-         $('tbody tr').click(function() {
-        $(this).hide();
-
-
-    }
-    )});
-
-
-</script> --}}
+<script>
 
 
 
+    $(document).ready(() => {
+            $('#libros').DataTable({
+                responsive: true,
+                autoWidth: false,
+                language: {
+                    "lengthMenu": "Mostrar " +
+                        `<select>
+                    <option value='5'>5</option>
+                    <option value='10'>10</option>
+                    <option value='25'>25</option>
+                    <option value='50'>50</option>
+                    <option value='-1'>Todos</option>
+                    </select>` + " registros por página",
+                    "zeroRecords": "Nada encontrado - Disculpa",
+                    "info": "Mostrando la página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No records available",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    'search': 'Buscar:',
+                    "processing": 'Procesando...',
+                    'paginate': {
+                        'next': 'Siguiente',
+                        'previous': 'Anterior'
+                    }
+                },
+                processing: true,
+                serverSide: true,
 
-    <script>
-        $('#libros').DataTable({
-            responsive: true,
-            autoWidth: false,
-            // aca oculto la columna de etiquetas o tag
-            // para que una columna no sea searchable hay que poner falso ej:
-            // searchable: false,
+                ajax: "{{ route('books.index') }}",
+                columns: [{
+                        data: 'inventory'
 
-            ///// otros ejemplos
-            //        columnDefs: [
-            //     {
-            //         target: 2,
-            //         visible: false,
-            //         searchable: false,
-            //     },
-            //     {
-            //         target: 8,
-            //         visible: false,
-            //     },
-            // ],
-            columnDefs: [{
+                    },
+                    {
+                        data: 'title'
 
-                target: 8,
-                visible: false
-            }, ],
+                    },
+                    {
+                        data: 'autor', name: 'autor'
+                    },
+                     {
+                        data: 'others_auth'
 
 
-            "language": {
-                "lengthMenu": "Mostrar " +
-                    `<select>
-                <option value='5'>5</option>
-                <option value='10'>10</option>
-                <option value='25'>25</option>
-                <option value='50'>50</option>
-                <option value='-1'>Todos</option>
-                </select>` + " registros por página",
-                "zeroRecords": "Nada encontrado - Disculpa",
-                "info": "Mostrando la página _PAGE_ de _PAGES_",
-                "infoEmpty": "No records available",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                'search': 'Buscar:',
-                'paginate': {
-                    'next': 'Siguiente',
-                    'previous': 'Anterior'
-                }
-            }
+                    },
+                    {
+                        data: 'edition'
+                    },
+                     {
+                        data: 'condition'
+                    },
+
+                    {
+                        data: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+
+                    {
+                        data: 'tags',
+                        visible: false,
+                        searchable: true,
+                    }
+                ]
+            });
         });
-    </script>
+
+</script>
+
+
+    // <script>
+    //     $('#libros').DataTable({
+    //         responsive: true,
+    //         autoWidth: false,
+    //         // aca oculto la columna de etiquetas o tag
+    //         // para que una columna no sea searchable hay que poner falso ej:
+    //         // searchable: false,
+
+    //         ///// otros ejemplos
+    //         //        columnDefs: [
+    //         //     {
+    //         //         target: 2,
+    //         //         visible: false,
+    //         //         searchable: false,
+    //         //     },
+    //         //     {
+    //         //         target: 8,
+    //         //         visible: false,
+    //         //     },
+    //         // ],
+    //         columnDefs: [{
+
+    //             target: 8,
+    //             visible: false
+    //         }, ],
+
+
+    //         "language": {
+    //             "lengthMenu": "Mostrar " +
+    //                 `<select>
+    //             <option value='5'>5</option>
+    //             <option value='10'>10</option>
+    //             <option value='25'>25</option>
+    //             <option value='50'>50</option>
+    //             <option value='-1'>Todos</option>
+    //             </select>` + " registros por página",
+    //             "zeroRecords": "Nada encontrado - Disculpa",
+    //             "info": "Mostrando la página _PAGE_ de _PAGES_",
+    //             "infoEmpty": "No records available",
+    //             "infoFiltered": "(filtrado de _MAX_ registros totales)",
+    //             'search': 'Buscar:',
+    //             'paginate': {
+    //                 'next': 'Siguiente',
+    //                 'previous': 'Anterior'
+    //             }
+    //         }
+    //     });
+    // </script>
 @endsection
