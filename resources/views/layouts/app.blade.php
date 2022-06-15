@@ -80,6 +80,10 @@
                                         <a class="nav-link" href="{{ route('categories.index') }}">
                                             Categorías</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('users-book.index') }}">
+                                            Usuarios</a>
+                                    </li>
                                 </ul>
 
 

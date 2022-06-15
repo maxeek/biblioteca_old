@@ -13,13 +13,37 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create User Book</span>
+                        <span class="card-title">Crear usario Biblioteca</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('user-books.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('users-book.store') }}" role="form"
+                            enctype="multipart/form-data">
                             @csrf
 
-                            @include('user-book.form')
+                            <div class="box box-info padding-1">
+                                <div class="box-body">
+
+                                    <div class="form-group">
+                                        {{ Form::label('DNI') }}
+                                        {{ Form::text('dni', $userBook->dni, ['class' => 'form-control' . ($errors->has('dni') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese DNI']) }}
+                                        {!! $errors->first('dni', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('Apellido') }}
+                                        {{ Form::text('surname', $userBook->surname, ['class' => 'form-control' . ($errors->has('surname') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese apellido']) }}
+                                        {!! $errors->first('surname', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('Nombre') }}
+                                        {{ Form::text('name', $userBook->surname, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese nombres']) }}
+                                        {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
+                                    </div>
+
+                                </div>
+                                <div class="box-footer mt20">
+                                    <button type="submit" class="btn btn-primary">Agregar usuario</button>
+                                </div>
+                            </div>
 
                         </form>
                     </div>

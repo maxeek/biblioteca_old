@@ -15,25 +15,25 @@ return new class extends Migration
     {
         Schema::create('leases', function (Blueprint $table) {
             $table->id();
-           
-            
-        
-            $table->unsignedBigInteger('id_user_book');
-            $table->unsignedBigInteger('id_book');
+
+
+
+            $table->unsignedBigInteger('book_user_id');
+            $table->unsignedBigInteger('book_id');
 
             $table->date('date_in');
             $table->date('date_out');
-            
-            
-            
-            $table->foreign('id_user_book')->references('id')->on('user_books')
+
+
+
+            $table->foreign('book_user_id')->references('id')->on('user_books')
             ->onDelete("cascade")
             ->onUpdate("cascade");
-            
-            $table->foreign('id_book')->references('id')->on('books')
+
+            $table->foreign('book_id')->references('id')->on('books')
             ->onDelete("cascade")
             ->onUpdate("cascade");
-            
+
             $table->timestamps();
         });
     }

@@ -1,9 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\UserBookRequest;
 
-use App\Models\UserBook;
+
+
 use Illuminate\Http\Request;
+
+use App\Models\User_book;
+
+
+
+
 
 /**
  * Class UserBookController
@@ -27,10 +35,12 @@ class UserBookController extends Controller
      */
     public function index()
     {
-        $userBooks = UserBook::paginate();
 
-        return view('user-book.index', compact('userBooks'))
-            ->with('i', (request()->input('page', 1) - 1) * $userBooks->perPage());
+
+         $userBooks=User_book::all();
+        return view('user-book.index', compact('userBooks'));
+
+
     }
 
     /**
@@ -40,7 +50,11 @@ class UserBookController extends Controller
      */
     public function create()
     {
-        $userBook = new UserBook();
+
+
+
+
+        $userBook = new User_book();
         return view('user-book.create', compact('userBook'));
     }
 
@@ -50,14 +64,26 @@ class UserBookController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserBookRequest $request)
     {
-        request()->validate(UserBook::$rules);
+        //  request()->validate(User_book::$rules);
 
-        $userBook = UserBook::create($request->all());
+        // $userBook = User_book::create($request->all());
 
-        return redirect()->route('user-books.index')
-            ->with('success', 'UserBook created successfully.');
+        // return redirect()->route('users-book.index')
+        //     ->with('success', 'Usuario de biblioteca ingresado con éxito!!!');
+
+        $userBook = new User_book();
+
+        $userBook->dni = $request->get('dni');
+        $userBook->surname = $request->get('surname');
+        $userBook->name = $request->get('name');
+        $userBook->save();
+
+        return redirect()->route('users-book.index')
+            ->with('success', 'Usuario de biblioteca ingresado con éxito!!!');
+
+
     }
 
     /**
@@ -66,9 +92,11 @@ class UserBookController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function show($id)
     {
-        $userBook = UserBook::find($id);
+        $userBook = User_book::find($id);
 
         return view('user-book.show', compact('userBook'));
     }
@@ -81,7 +109,7 @@ class UserBookController extends Controller
      */
     public function edit($id)
     {
-        $userBook = UserBook::find($id);
+        $userBook = User_book::find($id);
 
         return view('user-book.edit', compact('userBook'));
     }
@@ -93,13 +121,13 @@ class UserBookController extends Controller
      * @param  UserBook $userBook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserBook $userBook)
+    public function update(Request $request, User_book $userBook)
     {
-        request()->validate(UserBook::$rules);
+        request()->validate(User_book::$rules);
 
         $userBook->update($request->all());
 
-        return redirect()->route('user-books.index')
+        return redirect()->route('users-book.index')
             ->with('success', 'UserBook updated successfully');
     }
 
@@ -110,9 +138,9 @@ class UserBookController extends Controller
      */
     public function destroy($id)
     {
-        $userBook = UserBook::find($id)->delete();
+        $userBook = User_book::find($id)->delete();
 
-        return redirect()->route('user-books.index')
-            ->with('success', 'UserBook deleted successfully');
+        return redirect()->route('users-book.index')
+            ->with('success', 'Usuario eliminado con éxtito!!!');
     }
 }

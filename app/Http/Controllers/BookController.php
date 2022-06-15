@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User_book;
 use Illuminate\Http\Request;
 use App\Models\Author;
 use App\Models\Category;
@@ -50,7 +51,7 @@ class BookController extends Controller
 
                         $ids=$books->id;
 
-                        return '<a href="books/' .  $ids . '" class="btn btn-primary mr-2">Mostrar</a>' . '<a href="books/' .  $ids . '/edit " class="btn btn-success mr-2">Editar</a>';
+                        return '<a href="books/' .  $ids . '" class="btn btn-primary mr-2">Mostrar</a>' . '<a href="books/' .  $ids . '/edit " class="btn btn-success mr-2">Editar</a>' . '<a href="books/' .  $ids . '/lend "class="btn btn-warning mr-2">Prestar</a>' ;
 
                     })
 
@@ -112,6 +113,15 @@ class BookController extends Controller
         $book = Book::find($id);
 
         return view('book.show', compact('book'));
+    }
+
+  /** Prestar
+ */
+    public function lend($id)
+    {
+        $book = Book::find($id);
+$usersbook = User_book::orderBy('surname')->get();
+        return view('book.lend ', compact('book'),  ['usersbook' => $usersbook]);
     }
 
     /**

@@ -57,7 +57,6 @@
                                         <th>Título</th>
                                         <th>Autor</th>
 
-                                        <th>Otros Autores</th>
                                         <th>Edición</th>
 
 
@@ -179,11 +178,6 @@
                     {
                         data: 'autor', name: 'autor'
                     },
-                     {
-                        data: 'others_auth'
-
-
-                    },
                     {
                         data: 'edition'
                     },
@@ -209,7 +203,7 @@
 </script>
 
 
-    // <script>
+    <script>
     //     $('#libros').DataTable({
     //         responsive: true,
     //         autoWidth: false,

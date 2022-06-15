@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_books', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_book');
-            $table->integer('id_category');
-
+           $table->id();
+             $table->string('dni',10)->nullable();
+             $table->string('surname',25)->nullable();
+            $table->string('name',25)->nullable();
+            $table->timestamps();
         });
     }
 

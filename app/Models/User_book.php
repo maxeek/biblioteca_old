@@ -7,5 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class User_book extends Model
 {
-    use HasFactory;
+
+    //    static $rules = [
+    //        'dni' =>'unique',
+	// 	'surname' => 'max:25',
+	// 	'name' => 'max:25',
+
+    //     'dni' =>'max:25',
+
+
+    // ];
+
+
+
+
+
+     protected $fillable = ['surname','name', 'dni'];
+
+    //     public function usuariosbooks()
+    // {
+    //     return $this->hasMany('App\Models\Book', 'user_book_id', 'id');
+    // }
+
+
 }

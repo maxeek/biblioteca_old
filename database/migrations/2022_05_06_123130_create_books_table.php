@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('category_id');
+            // $table->unsignedBigInteger('user_book_id');
 
             $table->integer('inventory')->unique();
 
@@ -44,6 +45,11 @@ return new class extends Migration
              $table->foreign('author_id')->references('id')->on('authors')
              ->onDelete("cascade")
              ->onUpdate("cascade");
+
+            //  $table->foreign('user_book_id')->references('id')->on('user_books')
+            //  ->onDelete("cascade")
+            //  ->onUpdate("cascade");
+
               $table->foreign('category_id')->references('id')->on('categories')
              ->onDelete("cascade")
              ->onUpdate("cascade");

@@ -37,14 +37,19 @@
                                         {{ Form::label('Autor') }}
                                         <select name="author_id" id="author_id" class="form-group text-uppercase">
 
+
+                                                <option class="text-uppercase" selected value={{ $book->author_id }}>
+                                                {{ $book->author->surname }} {{ $book->author->name }}</option>
+
+
+
+
                                             @for ($i = 0; $i < count($authors); $i++)
                                                 <option class="text-uppercase" value={{ $authors[$i]->id }}>
                                                     {{ $authors[$i]->surname }} {{ $authors[$i]->name }} </option>
                                             @endfor
 
 
-                                            <option class="text-uppercase" selected value={{ $book->author_id }}>
-                                                {{ $book->author->surname }} {{ $book->author->name }}</option>
 
 
 
@@ -55,13 +60,17 @@
                                         {{ Form::label('Categoría') }}
                                         <select name="category_id" id="category_id" class="form-group text-uppercase">
 
+
+                                            <option class="text-uppercase" selected value={{ $book->author_id }}>
+                                                {{ $book->categ->name }} </option>
+
+
                                             @for ($i = 0; $i < count($categories); $i++)
                                                 <option value={{ $categories[$i]->id }}>{{ $categories[$i]->name }}
                                                 </option>
                                             @endfor
 
-                                            <option class="text-uppercase" selected value={{ $book->author_id }}>
-                                                {{ $book->categ->name }} </option>
+
 
 
 
