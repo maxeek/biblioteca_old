@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Lease;
 use App\Models\User_book;
 use Illuminate\Http\Request;
 use App\Models\Author;
@@ -50,8 +51,15 @@ class BookController extends Controller
 
 
                         $ids=$books->id;
+                        if ($books->condition === 1) {
+                                                    return '<a href="books/' .  $ids . '" class="btn btn-primary mr-2">Mostrar</a>' . '<a href="books/' .  $ids . '/edit " class="btn btn-success mr-2">Editar</a>' . '<a href="aprestar/' .  $ids . '"class="btn btn-warning mr-2">Prestar</a>' ;
 
-                        return '<a href="books/' .  $ids . '" class="btn btn-primary mr-2">Mostrar</a>' . '<a href="books/' .  $ids . '/edit " class="btn btn-success mr-2">Editar</a>' . '<a href="books/' .  $ids . '/lend "class="btn btn-warning mr-2">Prestar</a>' ;
+                        } else {
+
+                            return '<a href="books/' .  $ids . '" class="btn btn-primary mr-2">Mostrar</a>' . '<a href="books/' .  $ids . '/edit " class="btn btn-success mr-2">Editar</a>' . '<a href="adevolver/' .  $ids . '"class="btn btn-outline-danger mr-2">Devolver</a>' ;
+
+                        }
+
 
                     })
 
@@ -117,14 +125,54 @@ class BookController extends Controller
 
   /** Prestar
  */
-    public function lend($id)
-    {
-        $book = Book::find($id);
-$usersbook = User_book::orderBy('surname')->get();
-        return view('book.lend ', compact('book'),  ['usersbook' => $usersbook]);
-    }
+//     public function lend($id)
+//     {
+//         $book = Book::find($id);
+// $usersbook = User_book::orderBy('surname')->get();
+//         return view('book.lend ', compact('book'),  ['usersbook' => $usersbook]);
+//     }
 
+
+
+    /*
+lend update actualiza los datos en la condicion de libro y ademas
+crea un nuevo registro en la tabla lease con el id del libro y el id
+del usuario. tabien la fecha del prestamo.
+
+
+    */
+
+    // public function lendupdate(Request $request, Book $id)
+    // {
+
+
+    //     // $book->update($request->all());
+
+    //        $book=Book::find($id);
+    //     //    $userbook=User_book::find($id);
+
+    //     $book->condition = $request->get('prestado');
+
+
+    //     // $prestado=0;
+
+    //     // $book->condition = $prestado;
+    //     $book->save();
+
+    // // $prestamo= new Lease();
+    // //     $prestamo->book_id = $request->get('book_id_del_form');
+    // //     $prestamo->user_book_id = $request->get('user_id_del_form');
+
+    //     return redirect()
+    //         ->route('books.index')
+    //         ->with('success', 'Libro prestado exitosamente a fulano.');
+    // }
     /**
+     *
+
+
+
+
      * Show the form for editing the specified resource.
      *
      * @param  int $id
@@ -178,6 +226,6 @@ $usersbook = User_book::orderBy('surname')->get();
 
         return redirect()
             ->route('books.index')
-            ->with('success', 'Book deleted successfully');
+            ->with('success', 'Elimiando exitosamente!');
     }
 }

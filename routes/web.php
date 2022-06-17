@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserBookController;
+use App\Http\Controllers\LeaseController;
+use App\Http\Controllers\Lease;
 
 
 
@@ -27,10 +29,18 @@ Route::get('/', function () {
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('books/{id}/lend', 'App\Http\Controllers\BookController@lend');
+// Route::get('books/{id}/lend', 'App\Http\Controllers\BookController@lend');
+// Route::patch('books/{id}', 'App\Http\Controllers\BookController@lendupdate');
 // ->name('book.lend');
 
 Route::resource('books', BookController::class);
+
+
+Route::get('aprestar/{id}', 'App\Http\Controllers\LeaseController@paraprestar');
+Route::get('adevolver/{id}', 'App\Http\Controllers\LeaseController@paradevolver');
+
+
+Route::resource('lends', LeaseController::class);
 
 
 

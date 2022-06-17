@@ -18,7 +18,7 @@ return new class extends Migration
 
 
 
-            $table->unsignedBigInteger('book_user_id');
+            $table->unsignedBigInteger('user_book_id');
             $table->unsignedBigInteger('book_id');
 
             $table->date('date_in');
@@ -26,7 +26,7 @@ return new class extends Migration
 
 
 
-            $table->foreign('book_user_id')->references('id')->on('user_books')
+            $table->foreign('user_book_id')->references('id')->on('user_books')
             ->onDelete("cascade")
             ->onUpdate("cascade");
 
