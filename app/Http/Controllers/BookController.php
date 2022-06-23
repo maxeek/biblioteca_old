@@ -120,7 +120,46 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        return view('book.show', compact('book'));
+
+            $buscaridlease = Lease::where('book_id', $id)
+            ->first();
+
+            // asocio desde la variable encontrado, el id de la tabla Leaase si la encuntra
+
+
+            $encontrado=$buscaridlease->id;
+
+            //En la variable datoslease busco el id del registro donde se guardan los datos
+            // de la persona (book_user_id) y del libro (book_id) para luego
+            // concatenar los datos del usuario (nombre->name) y (apellido->surname) desde
+            // la vista return.blade.php
+
+
+                    $datoslease = Lease::find($encontrado);
+
+
+            // todos los datos recolectados los llevo al return.blade.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return view('book.show', compact('book', 'datoslease'));
     }
 
   /** Prestar

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Author
+    Libros prestados
 @endsection
 @section('css')
     <!-- Styles -->
@@ -22,15 +22,15 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                Autores
+                                Libros prestados
                             </span>
 
-                            <div class="float-right">
+                            {{-- <div class="float-right">
                                 <a href="{{ route('authors.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     Agregar autor
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -41,39 +41,26 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="autores" class="table table-striped table-hover">
+                            <table id="librosprestados" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         {{-- <th>No</th> --}}
 
-                                        <th>Apellido</th>
-                                        <th>Nombre</th>
+                                        <th>Título</th>
+                                        <th>Lector</th>
 
-                                        <th></th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($authors as $author)
+                                    @foreach ($prestados as $prestado)
                                         <tr>
                                             {{-- <td>{{ ++$i }}</td> --}}
 
-                                            <td>{{ $author->surname }}</td>
-                                            <td>{{ $author->name }}</td>
+                                            <td>{{ $prestado->libroprestado_->title }}</td>
+                                            <td>{{ $prestado->lector->name }} {{ $prestado->lector->surname }}</td>
 
-                                            <td>
-                                                <form action="{{ route('authors.destroy', $author->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('authors.show', $author->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('authors.edit', $author->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> Editar</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                </form>
-                                            </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -96,7 +83,7 @@
 
 
   <script>
-        $('#autores').DataTable({
+        $('#librosprestados').DataTable({
             responsive: true,
             autoWidth: false,
             "language": {

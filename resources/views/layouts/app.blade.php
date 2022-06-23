@@ -77,6 +77,10 @@
                                             Libros</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('lends.index') }}">
+                                            Prestados</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="{{ route('categories.index') }}">
                                             Categorías</a>
                                     </li>

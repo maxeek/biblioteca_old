@@ -84,10 +84,16 @@
                             <strong>Signatura Top:</strong>
                             {{ $book->signatura_top }}
                         </div>
-                        {{-- <div class="form-group">
-                            <strong>Categoría o materia:</strong>
-                            {{ $book->categ_r->category_id }}
-                        </div> --}}
+                        <div class="form-group">
+
+                            @if ($book->condition == 1)
+                                <td></td>
+                            @else
+                                {{-- <td><strong>Prestado a:</strong> Juan garcía</td> --}}
+                               <td class="text-danger"> <strong>Libro prestado a </strong> <span>{{ $datoslease->lector->name }} {{ $datoslease->lector->surname }}</span></td>
+
+                            @endif
+                        </div>
 
 
                     </div>

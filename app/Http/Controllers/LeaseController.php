@@ -23,8 +23,10 @@ class LeaseController extends Controller
     public function index()
     {
 
+        $prestados=Lease::all();
+        return view('lend.index', compact('prestados'));
 
-//
+
     }
 
     /**

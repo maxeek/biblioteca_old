@@ -118,6 +118,8 @@
                                         {{ Form::text('condition', $book->condition, ['class' => 'form-control' . ($errors->has('condition') ? ' is-invalid' : ''), 'placeholder' => 'Condition']) }}
                                         {!! $errors->first('condition', '<div class="invalid-feedback">:message</div>') !!}
                                     </div> --}}
+                                    <input value=1 type="hidden" name="condition" id="condition">
+
                                     <div class="form-group">
                                         {{ Form::label('Signatura topográfica') }}
                                         {{ Form::text('signatura_top', $book->signatura_top, ['class' => 'form-control' . ($errors->has('signatura_top') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese signatura topográfica']) }}
