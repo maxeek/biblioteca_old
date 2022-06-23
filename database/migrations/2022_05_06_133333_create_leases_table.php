@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_book_id');
             $table->unsignedBigInteger('book_id');
 
-            $table->date('date_in');
-            $table->date('date_out');
+            $table->date('date_in')->nullable();
+            $table->date('date_out')>nullable();
 
 
 

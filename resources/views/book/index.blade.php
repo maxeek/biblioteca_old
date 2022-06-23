@@ -62,7 +62,7 @@
 
 
 
-                                        <th>Condición</th>
+
 
 
 
@@ -74,50 +74,8 @@
 
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($books as $book)
-                                        <tr>
-                                            <td style="visibility:hidden"></td>
-                                            <td>{{ $book->inventory }}</td>
-
-                                            <td style="width: 30%">{{ $book->title }}</td>
-                                            <td class="text-uppercase" style="width: 30%">
-                                                {{ $book->author->name . ' ' . $book->author->surname }}</td>
-
-                                            <td>{{ $book->others_auth }}</td>
-                                            <td>{{ $book->edition }}</td>
-
-                                            @if ($book->condition == 1)
-                                                <td style="width: 8%">Disponible</td>
-                                            @else
-                                                <td style="width: 8%">Prestado</td>
-                                            @endif
 
 
-
-
-
-
-
-
-
-                                            <td style="width: 35%">
-                                                <form action="{{ route('books.destroy', $book->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('books.show', $book->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('books.edit', $book->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> Editar</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                </form>
-                                            </td>
-                                            <td style='visibility:collapse'>{{ $book->tags }}</td>
-
-                                        </tr>
-                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -181,9 +139,9 @@
                     {
                         data: 'edition'
                     },
-                     {
-                        data: 'condition'
-                    },
+                    //  {
+                    //     data: 'condition'
+                    // },
 
                     {
                         data: 'action',

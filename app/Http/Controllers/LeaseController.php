@@ -73,10 +73,41 @@ class LeaseController extends Controller
     }
      public function paradevolver($id)
     {
+// Busco el libro que fue prestado
+// este id lo voy a usar después para buscar el book_id de la tabla lease.
 
         $book = Book::find($id);
-        $usersbook = User_book::orderBy('surname')->get();
-        return view('lend.return ', compact('book'),  ['usersbook' => $usersbook]);
+
+
+////  a los registros  de la tabla lease por el id de la tabla Book.
+// busco el book_id Lease que esta relacionado con el id de la tabla Book
+
+
+
+
+
+$buscaridlease = Lease::where('book_id', $id)
+->first();
+
+// asocio desde la variable encontrado, el id de la tabla Leaase
+
+
+$encontrado=$buscaridlease->id;
+
+//En la variable datoslease busco el id del registro donde se guardan los datos
+// de la persona (book_user_id) y del libro (book_id) para luego
+// concatenar los datos del usuario (nombre->name) y (apellido->surname) desde
+// la vista return.blade.php
+
+
+        $datoslease = Lease::find($encontrado);
+
+
+// todos los datos recolectados los llevo al return.blade.php
+
+
+
+        return view('lend.return ', compact('book', 'datoslease'));
 //
     }
 
@@ -88,9 +119,9 @@ class LeaseController extends Controller
      */
     public function return($id)
     {
-        $book = Book::find($id);
-        $usersbook = User_book::orderBy('surname')->get();
-        return view('lend.return ', compact('book'),  ['usersbook' => $usersbook]);
+        // $book = Book::find($id);
+        // $usersbook = User_book::orderBy('surname')->get();
+        // return view('lend.return ', compact('book'),  ['usersbook' => $usersbook]);
     }
 
     /**
@@ -102,14 +133,48 @@ class LeaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cero=5;
-                $book=Book::find($id);
-                 $book->condition =  $request->get('condition');
-                $book->save();
+
+
+        if ( $request->get('condition')==0) {
+
+
+        $book=Book::find($id);
+        $book->condition =  $request->get('condition');
+        $book->save();
+
+    $lease = new Lease();
+    $lease->book_id = $request->get('book_id');
+    $lease->book_user_id = $request->get('usersbook');
+
+    $lease->save();
+
+        }
+        else {
+             $book=Book::find($id);
+        $book->condition =  $request->get('condition');
+        $book->save();
+
+        Lease::where('book_id', '=', $id)->delete();
+
+
+        //    return redirect()
+        //     ->route('lends.destroy', $id);
+
+        }
+
+
+
+
+
+
+
+
+
+
 
                 return redirect()
-            ->route('books.index')
-            ->with('success', 'Libro prestado exitosamente a fulano.');
+            ->route('books.index');
+            // ->with('success', 'Libro prestado exitosamente a fulano.');
     }
 
     /**
@@ -120,6 +185,11 @@ class LeaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book_id_lease=$id;
+
+         $leasebook = Lease::find($book_id_lease)->delete();
+
+           return redirect()
+            ->route('books.index');
     }
 }

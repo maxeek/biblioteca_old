@@ -28,6 +28,9 @@ class User_book extends Model
     // {
     //     return $this->hasMany('App\Models\Book', 'user_book_id', 'id');
     // }
-
+ public function usuariolector()
+    {
+        return $this->hasOne('App\Models\Lease', 'id', 'book_user_id', 'book_id');
+    }
 
 }

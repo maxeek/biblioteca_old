@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Lease extends Model
 {
     use HasFactory;
+
+public function lector()
+    {
+        return $this->hasOne('App\Models\User_book', 'id', 'book_user_id');
+    }
+
+
 }
