@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('book_id');
 
             $table->date('date_in')->nullable();
-            $table->date('date_out')>nullable();
+            $table->date('date_out')->nullable();
 
 
 
