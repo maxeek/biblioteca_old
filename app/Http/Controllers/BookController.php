@@ -32,10 +32,10 @@ class BookController extends Controller
         if ($request->ajax()) {
 
 
-            ;
+
 
             $books = Book::with('author', 'categ')
-            ->orderBy('title');
+            ->orderBy('inventory');
 
 
 

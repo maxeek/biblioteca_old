@@ -31,7 +31,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                 Crear categoría
                                 </a>
                               </div>
                         </div>

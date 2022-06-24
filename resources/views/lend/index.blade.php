@@ -46,6 +46,7 @@
                                     <tr>
                                         {{-- <th>No</th> --}}
 
+                                        <th>N° Inventario</th>
                                         <th>Título</th>
                                         <th>Lector</th>
 
@@ -57,6 +58,7 @@
                                         <tr>
                                             {{-- <td>{{ ++$i }}</td> --}}
 
+                                            <td>{{ $prestado->libroprestado_->inventory }}</td>
                                             <td>{{ $prestado->libroprestado_->title }}</td>
                                             <td>{{ $prestado->lector->name }} {{ $prestado->lector->surname }}</td>
 

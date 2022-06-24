@@ -15,7 +15,7 @@ public function lector()
     }
 public function libroprestado_()
     {
-        return $this->hasOne('App\Models\Book', 'id', 'book_id');
+        return $this->hasOne('App\Models\Book', 'id', 'book_id', 'inventory');
     }
 
 }
